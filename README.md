@@ -128,6 +128,21 @@ General > Language & Region > Applications. To pin it, add to
 { "language": "en" }
 ```
 
+## Иконка в строке меню
+
+По умолчанию — глобус из SF Symbols. Другой символ задаётся в
+`~/.config/keenetic-policy/config.json`:
+
+```json
+{ "menuIcon": "shield.fill" }
+```
+
+Подойдёт любое имя SF Symbols, например `globe`, `network`, `shield`,
+`shield.fill`, `lock.shield.fill`, `checkmark.shield.fill`,
+`wifi.router.fill`, `point.3.connected.trianglepath.dotted`. Иконка template,
+поэтому сама подстраивается под светлую и тёмную строку меню. Свой SVG можно
+положить в `assets/menubar.svg` — сборка превратит его в template-картинку.
+
 ## Как это работает
 
 1. `GET /auth` — роутер отдаёт `X-NDM-Realm` и `X-NDM-Challenge`.
@@ -139,6 +154,21 @@ General > Language & Region > Applications. To pin it, add to
    отсутствие политики у клиента, поэтому она снимается через `{"no": true}`.
 
 Всё по локальной сети, наружу ничего не уходит.
+
+## Menu bar icon
+
+The default is the SF Symbols globe. Another symbol goes into
+`~/.config/keenetic-policy/config.json`:
+
+```json
+{ "menuIcon": "shield.fill" }
+```
+
+Any SF Symbols name works: `globe`, `network`, `shield`, `shield.fill`,
+`lock.shield.fill`, `checkmark.shield.fill`, `wifi.router.fill`,
+`point.3.connected.trianglepath.dotted`. The image is a template, so it follows
+the light and dark menu bar. A custom `assets/menubar.svg` is turned into a
+template image at build time.
 
 ## How it works
 

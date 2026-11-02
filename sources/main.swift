@@ -95,6 +95,7 @@ struct Config: Codable {
     var login = "admin"
     var mac = ""
     var language: String?
+    var menuIcon: String?
     var labels: [String: String] = [:]
     var lastPolicy: String?
 
@@ -106,6 +107,7 @@ struct Config: Codable {
         login = try container.decodeIfPresent(String.self, forKey: .login) ?? "admin"
         mac = try container.decodeIfPresent(String.self, forKey: .mac) ?? ""
         language = try container.decodeIfPresent(String.self, forKey: .language)
+        menuIcon = try container.decodeIfPresent(String.self, forKey: .menuIcon)
         labels = try container.decodeIfPresent([String: String].self, forKey: .labels) ?? [:]
         lastPolicy = try container.decodeIfPresent(String.self, forKey: .lastPolicy)
     }
@@ -887,7 +889,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         if let current, let policy = policies.first(where: { $0.name == current }) {
             let title = displayTitle(for: policy, config: config)
             if policy.isDefault && config.labels["default"] == nil {
-                setStatus(symbol: "globe", title: "🌐")
+                setStatus(symbol: config.menuIcon ?? "globe", title: "🌐")
             } else if title.count > 18 {
                 setStatus(symbol: nil, title: String(title.prefix(17)) + "…")
             } else {
@@ -895,7 +897,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             }
             statusItem.button?.toolTip = L10n.t("status.tooltip", title)
         } else {
-            setStatus(symbol: "globe", title: "🌐")
+            setStatus(symbol: config.menuIcon ?? "globe", title: "🌐")
             statusItem.button?.toolTip = L10n.t("status.unknown")
         }
 
@@ -938,7 +940,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private func setStatus(symbol: String?, title: String) {
         guard let button = statusItem.button else { return }
         if let symbol, let base = NSImage(systemSymbolName: symbol, accessibilityDescription: nil) {
-            let configuration = NSImage.SymbolConfiguration(pointSize: 14, weight: .regular)
+            let configuration = NSImage.SymbolConfiguration(pointSize: 15, weight: .bold)
             let image = base.withSymbolConfiguration(configuration) ?? base
             image.isTemplate = true
             button.image = image
