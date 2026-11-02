@@ -753,7 +753,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         statusItem.button?.font = NSFont.systemFont(ofSize: 12, weight: .medium)
-        statusItem.button?.title = "…"
+        setStatus(symbol: nil, title: "…")
 
         menu.delegate = self
         statusItem.menu = menu
@@ -833,7 +833,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             return
         }
 
-        statusItem.button?.title = "…"
+        setStatus(symbol: nil, title: "…")
         queue.async { [weak self] in
             guard let self else { return }
             let router = Router(config: config, password: password)
@@ -874,7 +874,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         menu.removeAllItems()
 
         if lastError == L10n.t("error.notConfigured") {
-            statusItem.button?.title = "⚠︎"
+            setStatus(symbol: "exclamationmark.triangle", title: "⚠︎")
             statusItem.button?.toolTip = L10n.t("status.notConfigured")
             menu.addItem(disabled(L10n.t("menu.header")))
             menu.addItem(.separator())
@@ -887,15 +887,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         if let current, let policy = policies.first(where: { $0.name == current }) {
             let title = displayTitle(for: policy, config: config)
             if policy.isDefault && config.labels["default"] == nil {
-                statusItem.button?.title = "🌐"
+                setStatus(symbol: "globe", title: "🌐")
             } else if title.count > 18 {
-                statusItem.button?.title = String(title.prefix(17)) + "…"
+                setStatus(symbol: nil, title: String(title.prefix(17)) + "…")
             } else {
-                statusItem.button?.title = title
+                setStatus(symbol: nil, title: title)
             }
             statusItem.button?.toolTip = L10n.t("status.tooltip", title)
         } else {
-            statusItem.button?.title = "🌐"
+            setStatus(symbol: "globe", title: "🌐")
             statusItem.button?.toolTip = L10n.t("status.unknown")
         }
 
@@ -932,6 +932,23 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         menu.addItem(.separator())
         menu.addItem(item(L10n.t("menu.setup"), #selector(openSetup)))
         menu.addItem(item(L10n.t("menu.quit"), #selector(quit)))
+    }
+
+    /// Template symbols follow the menu bar's appearance, emoji do not.
+    private func setStatus(symbol: String?, title: String) {
+        guard let button = statusItem.button else { return }
+        if let symbol, let base = NSImage(systemSymbolName: symbol, accessibilityDescription: nil) {
+            let configuration = NSImage.SymbolConfiguration(pointSize: 14, weight: .regular)
+            let image = base.withSymbolConfiguration(configuration) ?? base
+            image.isTemplate = true
+            button.image = image
+            button.imagePosition = .imageOnly
+            button.title = ""
+        } else {
+            button.image = nil
+            button.imagePosition = .noImage
+            button.title = title
+        }
     }
 
     private func item(_ title: String, _ action: Selector) -> NSMenuItem {
