@@ -891,7 +891,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         if let current, let policy = policies.first(where: { $0.name == current }) {
             let title = displayTitle(for: policy, config: config)
             if policy.isDefault && config.labels["default"] == nil {
-                setStatus(symbol: config.menuIcon ?? "globe", title: "🌐")
+                setStatus(symbol: config.menuIcon ?? "globe.americas.fill", title: "🌐")
             } else if title.count > 18 {
                 setStatus(symbol: nil, title: String(title.prefix(17)) + "…")
             } else {
@@ -899,7 +899,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             }
             statusItem.button?.toolTip = L10n.t("status.tooltip", title)
         } else {
-            setStatus(symbol: config.menuIcon ?? "globe", title: "🌐")
+            setStatus(symbol: config.menuIcon ?? "globe.americas.fill", title: "🌐")
             statusItem.button?.toolTip = L10n.t("status.unknown")
         }
 
@@ -943,8 +943,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         guard let button = statusItem.button else { return }
         if let symbol, let base = NSImage(systemSymbolName: symbol, accessibilityDescription: nil) {
             // 13 pt renders a 16x16 image, the size system menu bar icons use;
-            // 14 pt gives 17x17 for a slightly larger one.
-            let points = min(max(config.menuIconSize ?? 13, 10), 20)
+            // 16 pt gives 20x20, the default here.
+            let points = min(max(config.menuIconSize ?? 16, 10), 20)
             let configuration = NSImage.SymbolConfiguration(pointSize: points, weight: .bold)
             let image = base.withSymbolConfiguration(configuration) ?? base
             image.isTemplate = true

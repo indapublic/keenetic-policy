@@ -130,7 +130,8 @@ General > Language & Region > Applications. To pin it, add to
 
 ## Иконка в строке меню
 
-По умолчанию — глобус из SF Symbols. Другой символ задаётся в
+По умолчанию — залитый глобус (`globe.americas.fill`) размером 16 pt (20×20).
+Другой символ задаётся в
 `~/.config/keenetic-policy/config.json`:
 
 ```json
@@ -138,7 +139,7 @@ General > Language & Region > Applications. To pin it, add to
 ```
 
 `menuIconSize` — размер в пунктах: 13 даёт 16×16 (как системные иконки),
-14 — 17×17, 15 — 19×19. По умолчанию 13.
+14 — 17×17, 15 — 19×19, 16 — 20×20. По умолчанию 16.
 
 Подойдёт любое имя SF Symbols, например `globe`, `network`, `shield`,
 `shield.fill`, `lock.shield.fill`, `checkmark.shield.fill`,
@@ -160,7 +161,8 @@ General > Language & Region > Applications. To pin it, add to
 
 ## Menu bar icon
 
-The default is the SF Symbols globe. Another symbol goes into
+The default is the filled globe (`globe.americas.fill`) at 16 pt (20×20).
+Another symbol goes into
 `~/.config/keenetic-policy/config.json`:
 
 ```json
@@ -168,7 +170,7 @@ The default is the SF Symbols globe. Another symbol goes into
 ```
 
 `menuIconSize` is the point size: 13 renders 16×16 (system icon size), 14 gives
-17×17, 15 gives 19×19. The default is 13.
+17×17, 15 gives 19×19, 16 gives 20×20. The default is 16.
 
 Any SF Symbols name works: `globe`, `network`, `shield`, `shield.fill`,
 `lock.shield.fill`, `checkmark.shield.fill`, `wifi.router.fill`,
