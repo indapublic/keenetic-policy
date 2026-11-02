@@ -6,7 +6,7 @@ class KeeneticPolicy < Formula
   license "MIT"
   head "https://github.com/indapublic/keenetic-policy.git", branch: "main"
 
-  depends_on macos: ">= :ventura"
+  depends_on macos: :ventura
 
   def install
     # Release archives carry KeeneticPolicy.app signed with a Developer ID, so
