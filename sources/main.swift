@@ -14,10 +14,21 @@ let agentLabel = "com.indapublic.keeneticpolicy"
 // MARK: - Paths
 
 enum AppPaths {
+    /// The path the process was started from. CommandLine.arguments[0] is the
+    /// word as typed, so for `keenetic-policy` it has no directory at all;
+    /// _NSGetExecutablePath always knows the real one.
+    static let executable: URL = {
+        var size: UInt32 = 0
+        _NSGetExecutablePath(nil, &size)
+        var buffer = [CChar](repeating: 0, count: Int(size) + 1)
+        _NSGetExecutablePath(&buffer, &size)
+        return URL(fileURLWithPath: String(cString: buffer)).resolvingSymlinksInPath()
+    }()
+
     /// The .app bundle, also when the binary is started through a symlink
     /// (Homebrew installs one into bin/).
     static let bundle: Bundle = {
-        let executable = URL(fileURLWithPath: CommandLine.arguments[0]).resolvingSymlinksInPath()
+        let executable = AppPaths.executable
         let contents = executable.deletingLastPathComponent().deletingLastPathComponent()
         if contents.lastPathComponent == "Contents",
            contents.deletingLastPathComponent().pathExtension == "app",
@@ -543,7 +554,7 @@ func openedFromFinder() -> Bool {
 }
 
 func installedByHomebrew() -> Bool {
-    let path = URL(fileURLWithPath: CommandLine.arguments[0]).resolvingSymlinksInPath().path
+    let path = AppPaths.executable.path
     return path.contains("/Cellar/") || path.contains("/opt/homebrew/opt/") || path.contains("/usr/local/opt/")
 }
 
@@ -959,7 +970,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     @objc private func openSetup() {
         try? FileManager.default.createDirectory(at: AppPaths.configDir, withIntermediateDirectories: true)
-        let binary = AppPaths.bundle.executableURL?.path ?? CommandLine.arguments[0]
+        let binary = AppPaths.executable.path
         let script = """
         #!/bin/bash
         exec "\(binary)" --setup
