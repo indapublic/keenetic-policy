@@ -53,6 +53,8 @@ install-local: build ## Install into ~/Applications and start at login, without 
 	ditto $(APP) "$(HOME)/Applications/$(APP)"
 	/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister \
 		-f "$(HOME)/Applications/$(APP)"
+	mkdir -p "$(HOME)/bin"
+	ln -sfn "$(HOME)/Applications/$(APP)/Contents/MacOS/KeeneticPolicy" "$(HOME)/bin/keenetic-policy"
 	"$(HOME)/Applications/$(APP)/Contents/MacOS/KeeneticPolicy" --register
 	-open "$(HOME)/Applications/$(APP)"
 
