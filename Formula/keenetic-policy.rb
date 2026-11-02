@@ -1,8 +1,8 @@
 class KeeneticPolicy < Formula
   desc "Switch Keenetic access policies from the macOS menu bar"
   homepage "https://github.com/indapublic/keenetic-policy"
-  url "https://github.com/indapublic/keenetic-policy/releases/download/v1.0.4/KeeneticPolicy-1.0.4.zip"
-  sha256 "e70791feacba8f242762046fd74965eaaf09890fc31a2402e2cbc46cee6baa0e"
+  url "https://github.com/indapublic/keenetic-policy/releases/download/v1.0.5/KeeneticPolicy-1.0.5.zip"
+  sha256 "c37e969a4308a56511ec1d3cbdf72096a5e56b0b9e33c33c449b3ae68beb4359"
   license "MIT"
   head "https://github.com/indapublic/keenetic-policy.git", branch: "main"
 
