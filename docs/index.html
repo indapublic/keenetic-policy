@@ -231,7 +231,9 @@ function setLang(lang) {
 (function () {
   var saved = null;
   try { saved = localStorage.getItem('lang'); } catch (e) {}
-  var initial = saved || ((navigator.language || '').toLowerCase().indexOf('ru') === 0 ? 'ru' : 'en');
+  var requested = new URLSearchParams(location.search).get('lang');
+  var initial = (requested === 'ru' || requested === 'en') ? requested
+    : saved || ((navigator.language || '').toLowerCase().indexOf('ru') === 0 ? 'ru' : 'en');
   setLang(initial);
   document.querySelectorAll('[data-set-lang]').forEach(function (button) {
     button.addEventListener('click', function () { setLang(button.dataset.setLang); });
