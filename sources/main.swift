@@ -96,6 +96,7 @@ struct Config: Codable {
     var mac = ""
     var language: String?
     var menuIcon: String?
+    var menuIconSize: Double?
     var labels: [String: String] = [:]
     var lastPolicy: String?
 
@@ -108,6 +109,7 @@ struct Config: Codable {
         mac = try container.decodeIfPresent(String.self, forKey: .mac) ?? ""
         language = try container.decodeIfPresent(String.self, forKey: .language)
         menuIcon = try container.decodeIfPresent(String.self, forKey: .menuIcon)
+        menuIconSize = try container.decodeIfPresent(Double.self, forKey: .menuIconSize)
         labels = try container.decodeIfPresent([String: String].self, forKey: .labels) ?? [:]
         lastPolicy = try container.decodeIfPresent(String.self, forKey: .lastPolicy)
     }
@@ -940,8 +942,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private func setStatus(symbol: String?, title: String) {
         guard let button = statusItem.button else { return }
         if let symbol, let base = NSImage(systemSymbolName: symbol, accessibilityDescription: nil) {
-            // 13 pt renders a 16x16 image, the size system menu bar icons use.
-            let configuration = NSImage.SymbolConfiguration(pointSize: 13, weight: .bold)
+            // 13 pt renders a 16x16 image, the size system menu bar icons use;
+            // 14 pt gives 17x17 for a slightly larger one.
+            let points = min(max(config.menuIconSize ?? 13, 10), 20)
+            let configuration = NSImage.SymbolConfiguration(pointSize: points, weight: .bold)
             let image = base.withSymbolConfiguration(configuration) ?? base
             image.isTemplate = true
             button.image = image

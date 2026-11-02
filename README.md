@@ -134,8 +134,11 @@ General > Language & Region > Applications. To pin it, add to
 `~/.config/keenetic-policy/config.json`:
 
 ```json
-{ "menuIcon": "shield.fill" }
+{ "menuIcon": "shield.fill", "menuIconSize": 14 }
 ```
+
+`menuIconSize` — размер в пунктах: 13 даёт 16×16 (как системные иконки),
+14 — 17×17, 15 — 19×19. По умолчанию 13.
 
 Подойдёт любое имя SF Symbols, например `globe`, `network`, `shield`,
 `shield.fill`, `lock.shield.fill`, `checkmark.shield.fill`,
@@ -161,8 +164,11 @@ The default is the SF Symbols globe. Another symbol goes into
 `~/.config/keenetic-policy/config.json`:
 
 ```json
-{ "menuIcon": "shield.fill" }
+{ "menuIcon": "shield.fill", "menuIconSize": 14 }
 ```
+
+`menuIconSize` is the point size: 13 renders 16×16 (system icon size), 14 gives
+17×17, 15 gives 19×19. The default is 13.
 
 Any SF Symbols name works: `globe`, `network`, `shield`, `shield.fill`,
 `lock.shield.fill`, `checkmark.shield.fill`, `wifi.router.fill`,
