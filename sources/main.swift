@@ -940,7 +940,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private func setStatus(symbol: String?, title: String) {
         guard let button = statusItem.button else { return }
         if let symbol, let base = NSImage(systemSymbolName: symbol, accessibilityDescription: nil) {
-            let configuration = NSImage.SymbolConfiguration(pointSize: 15, weight: .bold)
+            // 13 pt renders a 16x16 image, the size system menu bar icons use.
+            let configuration = NSImage.SymbolConfiguration(pointSize: 13, weight: .bold)
             let image = base.withSymbolConfiguration(configuration) ?? base
             image.isTemplate = true
             button.image = image
