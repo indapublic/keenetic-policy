@@ -1,0 +1,41 @@
+name: Bug report
+description: Something KeeneticPolicy does wrong or doesn't do
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. The log tells most of the story, so please attach it.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected and what happened instead. If a policy did not switch, say which one you picked.
+    validations:
+      required: true
+  - type: input
+    id: router
+    attributes:
+      label: Router model and KeeneticOS version
+      description: Shown in the router's web interface, on the System dashboard.
+      placeholder: Keenetic Sprinter, 5.2
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: How you installed KeeneticPolicy
+      options:
+        - Homebrew
+        - Built from source
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: Log
+      description: |
+        Drag `~/Library/Logs/KeeneticPolicy.log` here. In Terminal, `open -R ~/Library/Logs/KeeneticPolicy.log` shows it in Finder. It has timestamps, the app version and the policy changes, nothing else.
+      placeholder: Drop the file here or paste its last lines.
+    validations:
+      required: true

@@ -1,0 +1,46 @@
+/* KeeneticPolicy — English */
+
+"menu.header" = "Access policy for this computer";
+"menu.refresh" = "Refresh";
+"menu.web" = "Router web interface";
+"menu.setup" = "Set Up…";
+"menu.quit" = "Quit";
+
+"policy.default" = "Default policy";
+"policy.emptyList" = "No policies";
+
+"status.notConfigured" = "Not set up";
+"status.unknown" = "Access policy unknown";
+"status.tooltip" = "Access policy: %@";
+
+"error.network" = "Cannot reach the router: %@";
+"error.auth" = "Wrong router login or password";
+"error.api" = "Router error: %@";
+"error.notConfigured" = "Not set up";
+"error.timeout" = "timeout";
+"error.emptyResponse" = "empty response";
+"error.noKeychain" = "No password in the keychain";
+
+"setup.title" = "Keenetic access policy switcher";
+"setup.router" = "Router address [%@]: ";
+"setup.login" = "Admin login [%@]: ";
+"setup.password" = "Password: ";
+"setup.mac" = "MAC address of this computer [%@]: ";
+"setup.noPassword" = "No password entered.";
+"setup.noMAC" = "Could not detect the MAC address, enter it manually.";
+"setup.checking" = "\nChecking the router…";
+"setup.done" = "Done.\n";
+"setup.policies" = "Access policies:";
+"setup.labelsHint" = "If a policy name is unclear, add a \"labels\" block to %@, for example: \"labels\": {\"default\": \"Home\", \"Policy0\": \"VPN\"}";
+"setup.cliHint" = "From the terminal: keenetic-policy --set Policy0";
+"setup.appHint" = "The app: open %@";
+"setup.failed" = "Failed: %@";
+
+"cli.noConfig" = "Not set up. Run: keenetic-policy --setup";
+"cli.noPassword" = "No password in the keychain. Run: keenetic-policy --setup";
+"cli.currentUnknown" = "The router did not report a policy for this MAC";
+"cli.setUsage" = "Usage: keenetic-policy --set <policy name>";
+"cli.policy" = "Policy: %@";
+"cli.policyDefault" = "default";
+"cli.mac" = "MAC: %@";
+"cli.help" = "KeeneticPolicy — Keenetic access policies\n\n  --setup            first-time setup (address, login, password, MAC)\n  --list             list policies\n  --current          current policy of this computer\n  --set <name>       switch the policy (\"default\" for the default one)\n  --check            check the settings and the connection\n  --register         add the app to Login Items\n  --unregister       remove the app from Login Items\n  --version          print the version\n\nWithout arguments the menu bar app starts.";

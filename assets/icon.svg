@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#4C8DFF"/>
+      <stop offset="0.55" stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#16307A"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.22"/>
+      <stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="20" stdDeviation="26" flood-color="#081436" flood-opacity="0.38"/>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" rx="232" fill="url(#bg)"/>
+  <rect width="1024" height="1024" rx="232" fill="url(#sheen)"/>
+
+  <g filter="url(#shadow)">
+    <path d="M512 168 L808 274 V516 C808 698 668 826 512 880 C356 826 216 698 216 516 V274 Z"
+          fill="#ffffff"/>
+  </g>
+
+  <g fill="none" stroke="#1E3A8A" stroke-width="32" stroke-linecap="round">
+    <circle cx="512" cy="516" r="128"/>
+    <ellipse cx="512" cy="516" rx="56" ry="128"/>
+    <path d="M384 516 H640"/>
+    <path d="M406 440 H618"/>
+    <path d="M406 592 H618"/>
+  </g>
+</svg>

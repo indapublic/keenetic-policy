@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Keenetic Policy — access policies in the macOS menu bar</title>
+<meta name="description" content="Switch the Keenetic access policy of your Mac from the menu bar: default or VPN, one click, no router web interface. Free and open source.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f1117" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://indapublic.github.io/keenetic-policy/">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://indapublic.github.io/keenetic-policy/">
+<meta property="og:title" content="Keenetic Policy — access policies in the macOS menu bar">
+<meta property="og:description" content="Default or VPN for this Mac, one click, no router web interface.">
+<meta property="og:image" content="https://indapublic.github.io/keenetic-policy/icon.png">
+<meta name="twitter:card" content="summary">
+<style>
+:root {
+  --bg: #ffffff;
+  --bg-soft: #f6f7fa;
+  --text: #141826;
+  --muted: #5a6072;
+  --line: #e4e7ee;
+  --brand: #2563eb;
+  --btn: #2563eb;
+  --btn-hover: #1d4ed8;
+  --code-bg: #f2f4f8;
+  --shadow: 0 1px 2px rgba(15, 20, 40, .06), 0 18px 50px rgba(20, 35, 90, .14);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1117;
+    --bg-soft: #161922;
+    --text: #eef1f6;
+    --muted: #a2a9b8;
+    --line: #262a35;
+    --brand: #8fb4ff;
+    --btn: #3b82f6;
+    --btn-hover: #60a5fa;
+    --code-bg: #1b1f2a;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 18px 50px rgba(0, 0, 0, .5);
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--brand); }
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+header.hero { text-align: center; padding: 72px 0 32px; }
+.hero img.icon { width: 128px; height: 128px; filter: drop-shadow(0 16px 32px rgba(20, 35, 90, .22)); }
+h1 { font-size: 40px; line-height: 1.15; letter-spacing: -.02em; margin: 24px 0 12px; }
+.tagline { font-size: 19px; color: var(--muted); max-width: 620px; margin: 0 auto 28px; }
+.actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 26px; }
+.btn {
+  display: inline-block; padding: 11px 22px; border-radius: 10px;
+  background: var(--btn); color: #fff; text-decoration: none; font-weight: 600;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, .25);
+}
+.btn:hover { background: var(--btn-hover); }
+.btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--line); box-shadow: none; }
+.btn.ghost:hover { background: var(--bg-soft); }
+
+pre {
+  background: var(--code-bg); border: 1px solid var(--line); border-radius: 12px;
+  padding: 14px 18px; overflow-x: auto; font-size: 14px; line-height: 1.5;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  text-align: left;
+}
+pre code { white-space: pre; }
+.inline-code { background: var(--code-bg); border-radius: 6px; padding: 2px 6px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 14px; }
+
+section { padding: 32px 0; }
+section.shot img { display: block; width: 100%; max-width: 420px; margin: 0 auto; border-radius: 14px; box-shadow: var(--shadow); border: 1px solid var(--line); }
+h2 { font-size: 24px; letter-spacing: -.01em; margin: 0 0 14px; }
+p.lead { color: var(--muted); margin-top: 0; }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
+.card { background: var(--bg-soft); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+.card h3 { margin: 0 0 6px; font-size: 16px; }
+.card p { margin: 0; color: var(--muted); font-size: 14.5px; }
+
+ol.steps { padding-left: 22px; color: var(--muted); }
+ol.steps li { margin-bottom: 8px; }
+ol.steps strong { color: var(--text); }
+
+footer { border-top: 1px solid var(--line); margin-top: 24px; padding: 24px 0 48px; color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+.lang { position: fixed; top: 16px; right: 16px; display: flex; gap: 4px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 10px; padding: 4px; }
+.lang button {
+  border: 0; background: transparent; color: var(--muted); font: inherit; font-size: 13px;
+  padding: 4px 10px; border-radius: 7px; cursor: pointer;
+}
+.lang button[aria-pressed="true"] { background: var(--bg); color: var(--text); box-shadow: 0 1px 2px rgba(0,0,0,.12); }
+</style>
+</head>
+<body>
+
+<div class="lang">
+  <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+  <button type="button" data-set-lang="ru" aria-pressed="false">RU</button>
+</div>
+
+<header class="hero wrap">
+  <img class="icon" src="icon.png" alt="Keenetic Policy">
+  <h1>Keenetic Policy</h1>
+  <p class="tagline" data-i18n="tagline">Default or VPN for this Mac — one click in the menu bar. No router web interface.</p>
+
+  <div class="actions">
+    <a class="btn" href="https://github.com/indapublic/keenetic-policy/releases/latest/download/KeeneticPolicy.dmg" data-i18n="download">Download for macOS</a>
+    <a class="btn ghost" href="https://github.com/indapublic/keenetic-policy">GitHub</a>
+  </div>
+
+  <pre><code>brew tap indapublic/keenetic-policy https://github.com/indapublic/keenetic-policy
+brew install indapublic/keenetic-policy/keenetic-policy
+brew services start keenetic-policy
+keenetic-policy --setup</code></pre>
+</header>
+
+<main class="wrap">
+
+<section class="shot">
+  <img id="shot" src="menu-en.png" alt="The menu bar menu with the policy list">
+</section>
+
+<section>
+  <h2 data-i18n="what">What it does</h2>
+  <div class="cards">
+    <div class="card">
+      <h3 data-i18n="c1t">One click</h3>
+      <p data-i18n="c1p">The menu lists your Keenetic access policies with a checkmark on the active one. Pick another and the traffic switches.</p>
+    </div>
+    <div class="card">
+      <h3 data-i18n="c2t">Only this Mac</h3>
+      <p data-i18n="c2p">It changes the policy of one client on the router, by MAC address. Phones, TVs and everything else stay as they were.</p>
+    </div>
+    <div class="card">
+      <h3 data-i18n="c3t">Local only</h3>
+      <p data-i18n="c3p">It talks to the router over the local network with the same login as the web interface. The password lives in the macOS keychain.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 data-i18n="setup">Set up</h2>
+  <ol class="steps">
+    <li data-i18n="s1">Install with Homebrew or the disk image.</li>
+    <li data-i18n="s2">Run <span class="inline-code">keenetic-policy --setup</span> once: the router address, the admin login, the password and this Mac's MAC address.</li>
+    <li data-i18n="s3">The icon appears in the menu bar: a globe for the default policy, the policy name otherwise.</li>
+  </ol>
+</section>
+
+<section>
+  <h2 data-i18n="how">How it works</h2>
+  <p class="lead" data-i18n="howp">It uses the router's RCI API — the same one the web interface uses. It logs in with the challenge-response scheme, reads the policy list and the client's policy, and posts the new one to /rci/ip/hotspot/host/policy. The default policy is not an object on the router but the absence of the attribute, so it is removed with {"no": true}.</p>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span data-i18n="footer">Free and open source, MIT.</span>
+    <span><a href="https://github.com/indapublic/keenetic-policy">GitHub</a> · <a href="https://github.com/indapublic/keenetic-policy/issues">Issues</a></span>
+  </div>
+</footer>
+
+<script>
+var strings = {
+  en: {
+    tagline: 'Default or VPN for this Mac — one click in the menu bar. No router web interface.',
+    download: 'Download for macOS',
+    what: 'What it does',
+    c1t: 'One click',
+    c1p: 'The menu lists your Keenetic access policies with a checkmark on the active one. Pick another and the traffic switches.',
+    c2t: 'Only this Mac',
+    c2p: 'It changes the policy of one client on the router, by MAC address. Phones, TVs and everything else stay as they were.',
+    c3t: 'Local only',
+    c3p: 'It talks to the router over the local network with the same login as the web interface. The password lives in the macOS keychain.',
+    setup: 'Set up',
+    s1: 'Install with Homebrew or the disk image.',
+    s2: 'Run <span class="inline-code">keenetic-policy --setup</span> once: the router address, the admin login, the password and this Mac\'s MAC address.',
+    s3: 'The icon appears in the menu bar: a globe for the default policy, the policy name otherwise.',
+    how: 'How it works',
+    howp: 'It uses the router\'s RCI API — the same one the web interface uses. It logs in with the challenge-response scheme, reads the policy list and the client\'s policy, and posts the new one to /rci/ip/hotspot/host/policy. The default policy is not an object on the router but the absence of the attribute, so it is removed with {"no": true}.',
+    footer: 'Free and open source, MIT.'
+  },
+  ru: {
+    tagline: 'Политика по умолчанию или VPN для этого Mac — один клик в строке меню. Без веб-интерфейса роутера.',
+    download: 'Скачать для macOS',
+    what: 'Что делает',
+    c1t: 'Один клик',
+    c1p: 'В меню список ваших политик доступа Keenetic с галочкой на активной. Выбрали другую — трафик переключился.',
+    c2t: 'Только этот Mac',
+    c2p: 'Меняется политика одного клиента на роутере, по MAC-адресу. Телефоны, телевизоры и остальное остаются как были.',
+    c3t: 'Только локально',
+    c3p: 'Общается с роутером по локальной сети тем же логином, что и веб-интерфейс. Пароль хранится в связке ключей macOS.',
+    setup: 'Настройка',
+    s1: 'Установите через Homebrew или из образа диска.',
+    s2: 'Один раз запустите <span class="inline-code">keenetic-policy --setup</span>: адрес роутера, логин администратора, пароль и MAC этого Mac.',
+    s3: 'Иконка появится в строке меню: глобус для политики по умолчанию, иначе — название политики.',
+    how: 'Как это работает',
+    howp: 'Используется RCI API роутера — тот же, что у веб-интерфейса. Вход по схеме challenge-response, чтение списка политик и политики клиента, запись новой в /rci/ip/hotspot/host/policy. «Политика по умолчанию» — не объект на роутере, а отсутствие атрибута, поэтому она снимается через {"no": true}.',
+    footer: 'Бесплатно и с открытым кодом, MIT.'
+  }
+};
+
+function setLang(lang) {
+  document.documentElement.lang = lang;
+  try { localStorage.setItem('lang', lang); } catch (e) {}
+  document.querySelectorAll('[data-i18n]').forEach(function (element) {
+    var text = strings[lang][element.dataset.i18n];
+    if (text !== undefined) element.innerHTML = text;
+  });
+  var shot = document.getElementById('shot');
+  if (shot) shot.src = lang === 'ru' ? 'menu-ru.png' : 'menu-en.png';
+  document.querySelectorAll('[data-set-lang]').forEach(function (button) {
+    button.setAttribute('aria-pressed', String(button.dataset.setLang === lang));
+  });
+}
+
+(function () {
+  var saved = null;
+  try { saved = localStorage.getItem('lang'); } catch (e) {}
+  var initial = saved || ((navigator.language || '').toLowerCase().indexOf('ru') === 0 ? 'ru' : 'en');
+  setLang(initial);
+  document.querySelectorAll('[data-set-lang]').forEach(function (button) {
+    button.addEventListener('click', function () { setLang(button.dataset.setLang); });
+  });
+})();
+</script>
+</body>
+</html>

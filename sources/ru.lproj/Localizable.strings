@@ -1,0 +1,46 @@
+/* KeeneticPolicy — русский */
+
+"menu.header" = "Политика доступа этого компьютера";
+"menu.refresh" = "Обновить";
+"menu.web" = "Веб-интерфейс роутера";
+"menu.setup" = "Настроить…";
+"menu.quit" = "Выход";
+
+"policy.default" = "Политика по умолчанию";
+"policy.emptyList" = "Список политик пуст";
+
+"status.notConfigured" = "Не настроено";
+"status.unknown" = "Политика доступа неизвестна";
+"status.tooltip" = "Политика доступа: %@";
+
+"error.network" = "Нет связи с роутером: %@";
+"error.auth" = "Неверный логин или пароль роутера";
+"error.api" = "Роутер вернул ошибку: %@";
+"error.notConfigured" = "Не настроено";
+"error.timeout" = "таймаут";
+"error.emptyResponse" = "пустой ответ";
+"error.noKeychain" = "Нет пароля в связке ключей";
+
+"setup.title" = "Переключатель политик доступа Keenetic";
+"setup.router" = "Адрес роутера [%@]: ";
+"setup.login" = "Логин администратора [%@]: ";
+"setup.password" = "Пароль: ";
+"setup.mac" = "MAC этого компьютера [%@]: ";
+"setup.noPassword" = "Пароль не введён.";
+"setup.noMAC" = "Не удалось определить MAC-адрес, укажите его вручную.";
+"setup.checking" = "\nПроверяю связь с роутером…";
+"setup.done" = "Готово.\n";
+"setup.policies" = "Политики доступа:";
+"setup.labelsHint" = "Если название политики непонятно, добавьте блок \"labels\" в %@, например: \"labels\": {\"default\": \"Дом\", \"Policy0\": \"VPN\"}";
+"setup.cliHint" = "Из терминала: keenetic-policy --set Policy0";
+"setup.appHint" = "Приложение: open %@";
+"setup.failed" = "Не получилось: %@";
+
+"cli.noConfig" = "Нет настроек. Запустите: keenetic-policy --setup";
+"cli.noPassword" = "Нет пароля в связке ключей. Запустите: keenetic-policy --setup";
+"cli.currentUnknown" = "Роутер не сообщил политику для этого MAC";
+"cli.setUsage" = "Использование: keenetic-policy --set <имя политики>";
+"cli.policy" = "Политика: %@";
+"cli.policyDefault" = "по умолчанию";
+"cli.mac" = "MAC: %@";
+"cli.help" = "KeeneticPolicy — политики доступа Keenetic\n\n  --setup            первичная настройка (адрес, логин, пароль, MAC)\n  --list             список политик\n  --current          текущая политика этого компьютера\n  --set <имя>        переключить политику (\"default\" — по умолчанию)\n  --check            проверка настроек и связи\n  --register         добавить приложение в объекты входа\n  --unregister       убрать приложение из объектов входа\n  --version          версия\n\nБез аргументов запускается приложение в строке меню.";
